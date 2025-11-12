@@ -6,7 +6,7 @@ export default defineConfig({
   base: "./",
   server: {
     host: "::",
-    port: 3000,
+    port: 5173,
   },
   plugins: [react()],
   build: {
@@ -14,12 +14,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Split vendor libraries into separate chunks
+          // Combine Fluent UI packages into a single fluent-ui chunk to avoid circular init
           'react-vendor': ['react', 'react-dom'],
           'router-vendor': ['react-router-dom'],
-          'fluent-components': ['@fluentui/react-components'],
-          'fluent-icons': ['@fluentui/react-icons'],
-          'fluent-tokens': ['@fluentui/tokens'],
+          'fluent-ui': ['@fluentui/react-components','@fluentui/react-icons','@fluentui/tokens'],
         }
       }
     }
